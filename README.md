@@ -1,10 +1,9 @@
 # VIGENERE-CIPHER
-## EX. NO: 1(D)
- 
+## EX.NO:4 IMPLEMETATION OF VIGENERE CIPHER
 
-## IMPLEMETATION OF VIGENERE CIPHER
+## Name:NATARAJ KUMARAN S
+## Reg No.212223230137
  
-
 ## AIM:
 
 To implement the Vigenere Cipher substitution technique using C program.
@@ -20,17 +19,74 @@ alphabet shifted cyclically to the left compared to the previous alphabet, corre
 ## ALGORITHM:
 
 STEP-1: Arrange the alphabets in row and column of a 26*26 matrix.
+
 STEP-2: Circulate the alphabets in each row to position left such that the first letter is attached to last.
+
 STEP-3: Repeat this process for all 26 rows and construct the final key matrix.
+
 STEP-4: The keyword and the plain text is read from the user.
+
 STEP-5: The characters in the keyword are repeated sequentially so as to match with that of the plain text.
+
 STEP-6: Pick the first letter of the plain text and that of the keyword as the row indices and column indices respectively.
+
 STEP-7: The junction character where these two meet forms the cipher character.
+
 STEP-8: Repeat the above steps to generate the entire cipher text.
 
 
-## PROGRAM
+## PROGRAM:
+```
+def vigenere_encrypt(text, key):
+    encrypted_text = []
+    key_length = len(key)
+    
+    for i, char in enumerate(text):
+        if 'A' <= char <= 'Z':
+            shift = ord(key[i % key_length].upper()) - ord('A')
+            encrypted_text.append(chr((ord(char) - ord('A') + shift) % 26 + ord('A')))
+        elif 'a' <= char <= 'z':
+            shift = ord(key[i % key_length].lower()) - ord('a')
+            encrypted_text.append(chr((ord(char) - ord('a') + shift) % 26 + ord('a')))
+        else:
+            encrypted_text.append(char)  # Keep non-alphabetic characters unchanged
+    
+    return "".join(encrypted_text)
 
-## OUTPUT
+def vigenere_decrypt(text, key):
+    decrypted_text = []
+    key_length = len(key)
+    
+    for i, char in enumerate(text):
+        if 'A' <= char <= 'Z':
+            shift = ord(key[i % key_length].upper()) - ord('A')
+            decrypted_text.append(chr((ord(char) - ord('A') - shift + 26) % 26 + ord('A')))
+        elif 'a' <= char <= 'z':
+            shift = ord(key[i % key_length].lower()) - ord('a')
+            decrypted_text.append(chr((ord(char) - ord('a') - shift + 26) % 26 + ord('a')))
+        else:
+            decrypted_text.append(char)  
+    
+    return "".join(decrypted_text)
 
-## RESULT
+key = "VAR"
+message = "saveethaengineeringcollege"
+
+print("Simulating Vigenère Cipher:")
+print("Original Message:", message)
+print("Key:", key)
+
+encrypted_message = vigenere_encrypt(message, key)
+print("Encrypted Message:", encrypted_message)
+
+decrypted_message = vigenere_decrypt(encrypted_message, key)
+print("Decrypted Message:", decrypted_message)
+```
+
+## OUTPUT:
+
+![image](https://github.com/user-attachments/assets/17bae89f-304c-42d9-afcc-a4d355778562)
+
+
+## RESULT:
+The program is executed successfully
